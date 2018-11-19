@@ -29,5 +29,11 @@ def editOne(name):
     langs[0]['name'] = request.json['name']
     return jsonify({'language' : langs[0]})
 
+@app.route('/lang/<string:name>', methods=['DELETE'])
+def deleteOne(name):
+    lang = [language for language in languages if language['name'] == name]
+    languages.remove(lang[0])
+    return jsonify({'languages' : languages})
+
 if __name__ == '__main__':
     app.run(debug=True)
